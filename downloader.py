@@ -5,7 +5,7 @@ import requests
 
 def download_to_dir(url, outDir):
     requestor = requests.get(url, allow_redirects=True)
-    fileName = fileNameFromURL(requestor.url)
+    fileName = file_name_from_url(requestor.url)
     directory = '%s/%s' % (outDir, fileName)
 
     # Exception handling for the HTTPS request
@@ -31,6 +31,6 @@ def download_to_dir(url, outDir):
 
 
 # Finds the name of the file based on the url name (Works!)
-def fileNameFromURL(url):
+def file_name_from_url(url):
     if url.find('/'):
         return url.rsplit('/', 1)[1]
