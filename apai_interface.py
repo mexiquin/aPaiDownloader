@@ -1,4 +1,5 @@
 import PySimpleGUI as sg
+import pytube
 
 menu_layout = [
     ['Tools', ['Get ffmpeg', 'Get youtube-dl']],
