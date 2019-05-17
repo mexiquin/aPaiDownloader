@@ -1,10 +1,9 @@
+import math
 import PySimpleGUI as sg
-import threading
-import pytube
+from pytube import YouTube
 from downloader import Downloader
 
 menu_layout = [
-    ['Tools', ['Get ffmpeg', 'Get youtube-dl']],
     ['Help', ['Update aPai (beta)', 'About']]
 ]
 
@@ -38,8 +37,7 @@ def main():
             sg.Popup("About aPai Downloader", 'Version 1.0',
                      'A simple program for downloading youtube videos in whichever popular format you want')
         elif event == 'Download':
-            bgThread = threading.Thread(target=ytDownload(youtube_url, out_dir, usrFormat))
-            print("Download Button Pressed!")
+            ytDownload(youtube_url, out_dir, usrFormat)
 
     print(values)
 
@@ -50,8 +48,21 @@ and using pytube to create youtube file on local
 hard drive
 '''
 def ytDownload(url, outDir, fileFormat):
-    pass
+    yt = YouTube(url, on_progress_callback=progressCheck)
+    global videosize
+    if 'Default' in fileFormat:
+        videosize = yt.streams.filter(progressive=True, file_extension = 'mp4').first().filesize
+        yt.streams.filter(progressive=True).first().download(outDir)
+    if 'Audio' in fileFormat:
+        videosize = yt.streams.filter(only_audio=True).first().filesize
+        yt.streams.filter(only_audio=True).first().download(outDir)
+    if 'Video' in fileFormat:
+        videosize = yt.streams.filter(adaptive=True).first().filesize
+        yt.streams.filter(adaptive=True).first().download(outDir)
 
+def progressCheck(stream = None, chunk = None, file_handle = None, remaining = None):
+    percent = math.floor(100*((videosize - remaining)/videosize))
+    sg.OneLineProgressMeter('Download Progress',percent, 100, 'key', 'Your video is downloading! :)')
 
 if __name__ == '__main__':
     main()
