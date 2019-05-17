@@ -1,8 +1,9 @@
-import send2trash
-from zipfile import ZipFile
 import os, shutil
+from send2trash import send2trash
+from zipfile import ZipFile
 
-def deleteFile(fileDir):
+
+def toTrash(fileDir):
     send2trash(fileDir)
 
 

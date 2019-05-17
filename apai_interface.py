@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 import pytube
+import threading
 
 menu_layout = [
     ['Tools', ['Get ffmpeg', 'Get youtube-dl']],
@@ -26,14 +27,16 @@ def main():
 
         menu_event = values[0]
         youtube_url = values[1]
-        format = values[2]
+        usrFormat = values[2]
         out_dir = values[3]
 
         if event == 'Quit':
             break
         elif event == 'About':
-            sg.Popup("About aPai Downloader", 'Version 1.0', 'A simple program for downloading youtube videos in '
-                                                             'whichever popular format you want')
+            sg.Popup("About aPai Downloader", 'Version 1.0', 
+            'A simple program for downloading youtube videos in whichever popular format you want')
+        elif event == 'Download':
+            print("Download Button Pressed!")
 
     print(values)
 
