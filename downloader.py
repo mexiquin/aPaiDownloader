@@ -10,12 +10,6 @@ class Downloader:
         self.url = url
         self.outDir = out_dir
 
-    def yt_or_other(self):
-        if "youtube.com/watch" in self.url:
-            self.video_downloader()
-        else:
-            self.download_to_dir()
-
     def set_url(self, url):
         self.url = url
 
@@ -58,15 +52,3 @@ class Downloader:
     def file_name_from_url(self):
         if self.url.find('/'):
             return self.url.rsplit('/', 1)[1]
-
-    def video_downloader(self):
-        pass
-
-    def audio_helper(self):
-        pass
-
-    def video_helper(self):
-        pass
-
-    def start(self):
-        self.yt_or_other()
