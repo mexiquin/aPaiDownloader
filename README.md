@@ -3,7 +3,7 @@
 aPai is a little project I started in order to help my Mom download karaoke songs from YouTube
 
 ## Building the Executable
-I'm not able to push the .exe to github, so I will provide the instructions for building it yourself. 
+The .exe is included in the _dist_ folder, but if you need to build this yourself, here's how: 
 
 ### Requirements
 * You will need python installed (version 3.7 preferrably)
